@@ -1,11 +1,11 @@
-import React,{ useState } from "react";
-import { fetchData } from "./api";
-import SelectDropdown from "./components/SelectDropdown";
-import Checkbox from "./components/Checkbox";
-import Button from "./components/Button";
-import Query from "./components/Query";
+import React, { useState } from "react";
+import { fetchData } from "../api";
+import SelectDropdown from "../components/SelectDropdown";
+import Checkbox from "../components/Checkbox";
+import Button from "../components/Button";
+import Query from "../components/Query";
 
-const App = () => {
+const Querytest = () => {
   const [queryCount, setQueryCount] = useState([]);
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState({});
@@ -100,4 +100,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Querytest;
