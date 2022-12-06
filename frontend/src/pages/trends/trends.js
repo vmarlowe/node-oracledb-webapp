@@ -206,8 +206,13 @@ const pieOpts = {
         <Button title={"Core"} id={"001"} onClick={() => (executeQueries() + getvicSexPieData())} />
         <Button title={"Clear Results"} onClick={() => resetResults()} />
       </div>
-      <div className="d-flex flex-row mb-5">
-        <Pie data={vicSexPieData} options={pieOpts}/>
+      <div >
+        <Pie 
+        data={vicSexPieData} 
+        height="400px"
+        width="400px"
+        options={pieOpts}
+        />
       </div>
       
     </div>
