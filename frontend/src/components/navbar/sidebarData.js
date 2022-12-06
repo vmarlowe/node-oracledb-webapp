@@ -32,4 +32,10 @@ export const SidebarData = [
         cName: 'nav-text'
     },  
    
+    {
+        title: 'Dangerous Times',
+        path: '/dt',
+        icon: <AiIcons.AiOutlineFileSearch />,
+        cName: 'nav-text'
+    },  
 ];
