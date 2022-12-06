@@ -26,6 +26,8 @@ export const fetchData = ({ queries, concurrency }) => {
 
     queries.forEach(({ sql, id, index, queryBinds }) =>
       q.push({ sql, id, index, binds: queryBinds[index] }, (err) => {
+        console.log("sql: " + sql + " id: " + id + " index: " + index);
+        console.log("bind:" + queryBinds);
         if (err) console.log(err);
         console.log(`finished processing ${id}`);
       })

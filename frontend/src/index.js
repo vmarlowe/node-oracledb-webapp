@@ -15,7 +15,7 @@ import {
 import Root from "./pages/Root";
 import Querytest from "./pages/Querytest";
 import ErrorPage from "./pages/error-page";
-import Trends from "./pages/trends";
+import Trends from "./pages/trends/trends";
 
 /*
 const router = (
