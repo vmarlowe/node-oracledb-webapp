@@ -201,28 +201,15 @@ const pieOpts = {
 };
 
   return (
-    <div className="container mt-5">
-      <SelectDropdown title={"Number of Queries"} onChange={queryCountHandler} options={queriesDropdown} />
-      <Checkbox title={"Concurrent Queries"} onChange={concurrentCheckedHandler} />
-      {checked && (
-        <SelectDropdown
-          title={"Concurrency Limit"}
-          onChange={(e) => {
-            setConcurrency(e.target.value);
-          }}
-          options={concurrencyDropdown}
-        />
-      )}
-      <div className="mb-3 mt-3">
-        {queryCount?.map((i) => (
-          <Query key={i} index={i} title={`SQL Query #${i + 1}`} results={results} />
-        ))}
-      </div>
+    <div id={"2938"}className="container mt-5">
       <div className="d-flex flex-row mb-5">
-        <Button title={"Query"} onClick={() => (executeQueries() + getvicSexPieData())} />
+        <Button title={"Core"} id={"001"} onClick={() => (executeQueries() + getvicSexPieData())} />
         <Button title={"Clear Results"} onClick={() => resetResults()} />
       </div>
-      <Pie data={vicSexPieData} options={pieOpts} height="1500px" width="1500px"/>
+      <div className="d-flex flex-row mb-5">
+        <Pie data={vicSexPieData} options={pieOpts}/>
+      </div>
+      
     </div>
   );
 };

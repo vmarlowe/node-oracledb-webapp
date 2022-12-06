@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDom from 'react-dom';
+import ReactDom from 'react-dom/client';
 import "../src/main.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -40,13 +40,20 @@ const router = (
   },
   
 ]); */
-
+/*
 ReactDom.render (
 <React.StrictMode>
   <App />
 </React.StrictMode>
 , document.getElementById("root")
 
+);
+*/
+
+ReactDom.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+  <App />
+  </React.StrictMode>
 );
 
 
