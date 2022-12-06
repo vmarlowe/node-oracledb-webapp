@@ -85,8 +85,8 @@ const Trends = () => {
 
 //populate pie data
 //these need to exist outside of getvicSexPieData because of useState hooks
-const [resArr, setResArr] = useState([]);
-const [resArrData, setResArrData] = useState([]);
+const [resArr, setResArr] = useState(['M','F']);
+const [resArrData, setResArrData] = useState([1,1]);
 
 //do only on page reload
 const getvicSexPieData =()=>{
