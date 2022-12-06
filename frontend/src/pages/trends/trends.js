@@ -24,8 +24,7 @@ const getvicSexPieData =()=>{
     pieArr.push({ sql: pieQuery, id: `sql-0`, index: 0, queryBinds: [] });
     //grab unique values of the attribute from the table to use as labels
 
-
-    fetchData({ queries: [{ sql: pieQuery, id: `sql-0`, index: 0, queryBinds: [] }], concurrency: null }).then((response) => {
+    fetchData({ queries: pieArr, concurrency: null }).then((response) => {
         //we can use "0" here since theres only one query.
         //the first [] corresponds to the query index, and will start at 0.
         //query index just what place the query is in when sending multiple queries. 
@@ -37,10 +36,9 @@ const getvicSexPieData =()=>{
 
         resArr.forEach((i) => {
             let subq = `SELECT COUNT(*) FROM ${pieTable} WHERE ${pieAttrib} = '${i}'`;
-            let subBinds = [];
             subqueries.push({ sql: subq, id: `sql-${tempInd}`, index: tempInd, queryBinds: []});
             tempInd++;
-            console.log(subqueries);
+            //console.log(subqueries);
         });
 
         fetchData({ queries: subqueries, concurrency: null}).then((response1) => {
