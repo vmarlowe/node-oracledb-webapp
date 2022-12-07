@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import ListGroup from 'react-bootstrap/ListGroup';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Badge from 'react-bootstrap/Badge';
 
 const tempStyle = {
   padding: '10px 10px 10px 10px',
@@ -72,7 +73,7 @@ function about() {
   
     <Card style={{ width: '18rem' }}>
       <Card.Header><b>Table: Complaint</b></Card.Header>
-      <Card.Header>Total # of Tuples:</Card.Header>
+      <Card.Header>Total # of Tuples: <Badge pill bg="primary">1000</Badge></Card.Header>
       <ListGroup variant="flush">
         <ListGroup.Item>Complaint_Number VARCHAR(11) NOT NULL,</ListGroup.Item>
         <ListGroup.Item>Attempt_Status VARCHAR(15) NOT NULL,</ListGroup.Item>
