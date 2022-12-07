@@ -20,10 +20,9 @@ const About = () => {
 
   const [bMap,setbMap] = useState(new Map());
 
-  const [totalTuples, settotalTuples] = useState('2500000')
+  const [totalTuples, settotalTuples] = useState('2500000');
 
   const [totalCompTable, settotalComp] = useState('200000');
-
   const [totalCompLocTable, setCompLocTable] = useState('40000')
   const [totalOffenseTable, setOffenseTable] = useState('40000');
   const [totalResponderTable, setResponderTable] = useState('40000');
@@ -92,7 +91,7 @@ const About = () => {
         });
       });
 
-      settotalTuples(parseInt(totalCompTable) + parseInt(totalCompLocTable) + parseInt(totalOffenseTable) + parseInt(totalResponderTable) + parseInt(totalPatrolBoroTable) + parseInt(totalPDOffense));
+      settotalTuples(parseInt(totalCompTable) + parseInt(totalCompLocTable) + parseInt(totalOffenseTable) + parseInt(totalResponderTable) + parseInt(totalPatrolBoroTable) + parseInt(totalPDOffense)) ;
 
       //setbronxComp(bMap.get('BRONX'));
   }
