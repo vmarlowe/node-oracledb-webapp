@@ -4,10 +4,9 @@ import SelectDropdown from "../../components/SelectDropdown";
 import Checkbox from "../../components/Checkbox";
 import Button from "../../components/Button";
 import Query from "../../components/Query";
-import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 const Querytest = () => {
-  const [queryCount, setQueryCount] = useState([0]);
+  const [queryCount, setQueryCount] = useState([]);
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState({});
   const [checked, setChecked] = useState(false);
@@ -76,31 +75,28 @@ const Querytest = () => {
   };
 
   return (
-
-    <>
-      <div class="container">
-        <div class="col" style={{ margin: '20px 0px 0px 0px' }}>
-          <Breadcrumb>
-            <Breadcrumb.Item href="/">Dashboard</Breadcrumb.Item>
-            <Breadcrumb.Item active>Query Tool</Breadcrumb.Item>
-          </Breadcrumb>
-        </div>
+    <div className="container mt-5">
+      <SelectDropdown title={"Number of Queries"} onChange={queryCountHandler} options={queriesDropdown} />
+      <Checkbox title={"Concurrent Queries"} onChange={concurrentCheckedHandler} />
+      {checked && (
+        <SelectDropdown
+          title={"Concurrency Limit"}
+          onChange={(e) => {
+            setConcurrency(e.target.value);
+          }}
+          options={concurrencyDropdown}
+        />
+      )}
+      <div className="mb-3 mt-3">
+        {queryCount?.map((i) => (
+          <Query key={i} index={i} title={`SQL Query #${i + 1}`} results={results} />
+        ))}
       </div>
-
-
-      <div className="container mt-5">
-
-        <div className="mb-3 mt-3">
-          {queryCount?.map((i) => (
-            <Query key={i} index={i} title={`SQL Query #${i + 1}`} results={results} />
-          ))}
-        </div>
-        <div className="d-flex flex-row mb-5">
-          <Button title={"Query"} onClick={() => executeQueries()} />
-          <Button title={"Clear Results"} onClick={() => resetResults()} />
-        </div>
+      <div className="d-flex flex-row mb-5">
+        <Button title={"Query"} onClick={() => executeQueries()} />
+        <Button title={"Clear Results"} onClick={() => resetResults()} />
       </div>
-    </>
+    </div>
   );
 };
 
