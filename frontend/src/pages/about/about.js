@@ -16,9 +16,16 @@ const tempStyle = {
 function about() {
   return (
     <>
+
     <div className='about'>
-   
     <div class="container">
+    <div class="col" style={{ margin: '20px 0px 0px 0px' }}>
+    <Breadcrumb>
+      <Breadcrumb.Item href="/">Dashboard</Breadcrumb.Item>
+      <Breadcrumb.Item active>About</Breadcrumb.Item>
+    </Breadcrumb>
+    </div>
+
   <div class="row">
     <div class="col" style={{ margin: '20px 0px 0px 0px' }}>
     <h4>Within our application, we used the following tables: </h4>
