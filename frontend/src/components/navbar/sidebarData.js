@@ -20,6 +20,21 @@ export const SidebarData = [
     }, 
 
     {
+        title: 'Query 2',
+        path: '/query1',
+        icon: <AiIcons.AiOutlineFileSearch />,
+        cName: 'nav-text'
+    }, 
+
+    {
+        title: 'Query 3',
+        path: '/query1',
+        icon: <AiIcons.AiOutlineFileSearch />,
+        cName: 'nav-text'
+    }, 
+
+
+    {
         title: 'Trend View',
         path: '/trends',
         icon: <BsIcons.BsGraphUp />,
