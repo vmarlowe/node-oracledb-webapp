@@ -21,14 +21,14 @@ export const SidebarData = [
 
     {
         title: 'Query 2',
-        path: '/query1',
+        path: '/query2',
         icon: <AiIcons.AiOutlineFileSearch />,
         cName: 'nav-text'
     }, 
 
     {
         title: 'Query 3',
-        path: '/query1',
+        path: '/query3',
         icon: <AiIcons.AiOutlineFileSearch />,
         cName: 'nav-text'
     }, 

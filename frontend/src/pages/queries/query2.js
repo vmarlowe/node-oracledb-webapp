@@ -132,16 +132,12 @@ const Query2 =()=> {
       console.log(dataMap);
 
       const mQuery = `
-      WITH tempComp AS (SELECT EXTRACT(HOUR FROM Complaint_From_TM) hour, GPS_Coord, Complaint_Number 
-                        FROM Complaint),
-            tempLoc AS (SELECT GPS_COORD, BORO_NAME 
-            FROM Complaint_Location INNER JOIN Patrol_Boro 
-            ON Complaint_Location.patrol_boro_name = Patrol_Boro.patrol_boro_name)
-      SELECT BORO_NAME,HOUR,COUNT(*) 
-      FROM tempComp INNER JOIN tempLoc 
-      ON tempComp.gps_coord = tempLoc.gps_coord
-      GROUP BY Boro_Name,HOUR
-      ORDER BY BORO_NAME,HOUR
+      SELECT Patrol_Boro.Boro_Name, COUNT(*) AS Total_Complaints
+FROM Complaint
+INNER JOIN Complaint_Location ON Complaint.GPS_Coord = Complaint_Location.GPS_Coord
+INNER JOIN Patrol_Boro ON Complaint_Location.Patrol_Boro_Name = Patrol_Boro.Patrol_Boro_Name
+WHERE Complaint.Location_Desc = 'INSIDE' AND Complaint_Location.Premise_Type_Desc = 'ABANDONED BUILDING'
+GROUP BY Patrol_Boro.Boro_Name
       `
 
       let qArr = [];
@@ -267,7 +263,7 @@ const Query2 =()=> {
     <div style={{ margin: '20px 0px 0px 0px' }}>
     <Breadcrumb>
       <Breadcrumb.Item href="/">Dashboard</Breadcrumb.Item>
-      <Breadcrumb.Item active>Query1</Breadcrumb.Item>
+      <Breadcrumb.Item active>Query2</Breadcrumb.Item>
     </Breadcrumb>
     </div>
     

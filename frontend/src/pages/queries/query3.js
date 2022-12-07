@@ -267,7 +267,7 @@ const Query3 =()=> {
     <div style={{ margin: '20px 0px 0px 0px' }}>
     <Breadcrumb>
       <Breadcrumb.Item href="/">Dashboard</Breadcrumb.Item>
-      <Breadcrumb.Item active>Query1</Breadcrumb.Item>
+      <Breadcrumb.Item active>Query3</Breadcrumb.Item>
     </Breadcrumb>
     </div>
     

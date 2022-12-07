@@ -23,8 +23,8 @@ function App() {
           <Route path='/tables' exact element={<Tables/>} />
           <Route path='/querytool' exact element={<Query/>} />
           <Route path='/query1' exact element={<Query1/>} />
-          <Route path='/query1' exact element={<Query2/>} />
-          <Route path='/query1' exact element={<Query3/>} />
+          <Route path='/query2' exact element={<Query2/>} />
+          <Route path='/query3' exact element={<Query3/>} />
           <Route path='/about' exact element={<About/>} />
         </Routes>
         </div>
