@@ -1,5 +1,27 @@
 import React from 'react'
+import { fetchData } from "../../api";
 
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+  } from 'chart.js';
+  import { Line } from 'react-chartjs-2';
+  
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+  );
 /*
 Complex query:
 6.2 Which zones (residential, commercial, or public) had the highest percentage increase 
@@ -27,21 +49,26 @@ ORDER BY reports DESC;
 */
 
 const DangerTime =()=> {
+    let qArr = [];
+    
+    let stime = 0;
+    let mQuery = `WITH a AS (SELECT * FROM 
+                    (Complaint INNER JOIN Complaint_Location 
+                    ON Complaint.gps_coord = Complaint_Location.gps_coord))
+                SELECT BORO_NAME,COUNT(*) AS reports FROM 
+                    (a INNER JOIN Patrol_Boro
+                    ON a.patrol_boro_name = Patrol_Boro.Patrol_boro_name)
+                WHERE EXTRACT(HOUR FROM Complaint_From_TM) = ${stime}
+                GROUP BY BORO_NAME
+                ORDER BY reports DESC`;
+    
+    qArr.push({ sql: mQuery, id: `sql-0`, index: 0, queryBinds: [] });
+
+    fetchData({ queries: qArr, concurrency: null }).then((response = {}) => {
+        console.log(response[0]["rows"]); 
+    });
+
     /*
-    let mQuery = `SELECT COUNT(*) FROM Patrol_Boro`;
-    let pieArr = [];
-
-    pieArr.push({ sql: pieQuery, id: `sql-0`, index: 0, queryBinds: [] });
-    //grab unique values of the attribute from the table to use as labels
-
-
-    fetchData({ queries: [{ sql: pieQuery, id: `sql-0`, index: 0, queryBinds: [] }], concurrency: null }).then((response) => {
-        //we can use "0" here since theres only one query.
-        //the first [] corresponds to the query index, and will start at 0.
-        //query index just what place the query is in when sending multiple queries. 
-        setResArr(response["0"]["rows"].map(obj => obj.VIC_SEX));
-        console.log("resArr: " + resArr); 
-        
         let subqueries = [];
         let tempInd = 0;
 
@@ -71,9 +98,42 @@ const DangerTime =()=> {
     });
     */
   
+    const options = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Chart.js Line Chart',
+          },
+        },
+      };
+      
+      const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+      
+    const data = {
+        labels,
+        datasets: [
+          {
+            label: 'Dataset 1',
+            data: [1,2,3],
+            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+          },
+          {
+            label: 'Dataset 2',
+            data: [3,2,1],
+            borderColor: 'rgb(53, 162, 235)',
+            backgroundColor: 'rgba(53, 162, 235, 0.5)',
+          },
+        ],
+      };
+
   return (
     <div className='dt' id='dt1'>
-    <div>these are dangerous time we live in - taikan</div>
+        <div><Line options={options} data={data} /></div>
     </div>
   )
 }
