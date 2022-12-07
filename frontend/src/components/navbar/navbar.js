@@ -18,6 +18,21 @@ function Navbar() {
       <Link to='#' className='menu-bars'>
       <FaIcons.FaBars onClick={showSidebar} />
       </Link>
+      
+      <center>
+      <h5 style={{color: '#fff', align: 'left',margin: '5px 10px 0px 20px'}}>
+      Welcome to the New York City Police Complaints Web Application!
+      </h5>
+      </center>
+
+      <Link to='/about' className='menu-bars'>
+      <h6 style={{color: '#fff', align: 'right',margin: '5px 50px 0px 0px'}}>
+      About   <AiIcons.AiFillInfoCircle onClick={showSidebar} />
+      </h6>
+  
+      </Link>
+      
+      
     </div>
     <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
     <ul className='nav-menu-items' onClick={showSidebar}>

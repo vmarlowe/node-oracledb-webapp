@@ -7,6 +7,8 @@ import Card from 'react-bootstrap/Card';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import ListGroup from 'react-bootstrap/ListGroup';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Badge from 'react-bootstrap/Badge';
+import Table from 'react-bootstrap/Table';
 
 const tempStyle = {
   padding: '10px 10px 10px 10px',
@@ -16,37 +18,176 @@ function dashboard() {
   return (
     <>
     <div className='dashboard'>
-    <h3>Use the above menu to navigate to various functionality.</h3>
-
-
-    <h5>Within our application, we used the following tables. </h5>
-    <div style={tempStyle}>
-    <Card style={{ width: '18rem', }}>
-      <Card.Header>Table: Complaint</Card.Header>
-      <ListGroup variant="flush">
-        <ListGroup.Item>Complaint_Number VARCHAR(11) NOT NULL,</ListGroup.Item>
-        <ListGroup.Item>Attempt_Status VARCHAR(15) NOT NULL,</ListGroup.Item>
-        <ListGroup.Item>Susp_Sex VARCHAR(1),</ListGroup.Item>
-        <ListGroup.Item>Susp_Race VARCHAR(30),</ListGroup.Item>
-        <ListGroup.Item>Susp_Age_Group_Min INT,</ListGroup.Item>
-        <ListGroup.Item>Susp_Age_Group_Max INT,</ListGroup.Item>
-        <ListGroup.Item>Vic_Sex VARCHAR(1),</ListGroup.Item>
-        <ListGroup.Item>Vic_Race VARCHAR(30),</ListGroup.Item>
-        <ListGroup.Item>Vic_Age_Group_Min INT,</ListGroup.Item>
-        <ListGroup.Item>Vic_Age_Group_Max INT,</ListGroup.Item>
-        <ListGroup.Item>Complaint_From_DT DATE,</ListGroup.Item>
-        <ListGroup.Item>Complaint_From_TM TIMESTAMP,</ListGroup.Item>
-        <ListGroup.Item>Complaint_To_DT DATE,</ListGroup.Item>
-        <ListGroup.Item>Complaint_To_TM TIMESTAMP,</ListGroup.Item>
-        <ListGroup.Item>Offense_Code INT NOT NULL,</ListGroup.Item>
-        <ListGroup.Item>GPS_Coord VARCHAR(40) NOT NULL,</ListGroup.Item>
-        <ListGroup.Item>Location_Desc VARCHAR(40),</ListGroup.Item>
-        <ListGroup.Item>Jurisdiction_Code INT NOT NULL,</ListGroup.Item>
-        <ListGroup.Item>--PRIMARY KEY (Complaint_Number, Offense_Code)</ListGroup.Item>
-        <ListGroup.Item>PRIMARY KEY (Complaint_Number)</ListGroup.Item>
-      </ListGroup>
-    </Card>
+   
+   
+    <div class="container">
+    <div style={{ margin: '20px 0px 0px 0px' }}>
+    <h4>Complaint Data Overview</h4>
     </div>
+  <div class="row">
+  <div style={{ margin: '20px 0px 0px 0px' }}>
+  <h5>Complaints By Borough</h5>
+  </div>
+    <div class="col-2" style={{ margin: '0px 10px 0px 10px' }}>
+  
+    <Card bg="danger" style={{ width: '180px' }}>
+        <Card.Body>
+          <center>
+          <div style={{ color: '#fff' }}>
+          <Card.Title>Total Complaints</Card.Title>
+          <Card.Text>
+            <h1>10485</h1>
+          </Card.Text>
+          </div>
+          </center>
+        </Card.Body>
+      </Card>
+      
+      <div style={{ margin: '40px 0px 0px 0px' }}>
+      <Card bg="danger" style={{ width: '180px' }}>
+        <Card.Body>
+          <center>
+          <div style={{ color: '#fff' }}>
+          <Card.Title>Manhattan Complaints</Card.Title>
+          <Card.Text>
+            <h1>285</h1>
+          </Card.Text>
+          </div>
+          </center>
+        </Card.Body>
+      </Card>
+      </div>
+      
+
+    </div>
+    <div class="col-2" style={{ margin: '0px 10px 0px 10px' }}>
+      
+    <Card bg="danger" style={{ width: '180px' }}>
+        <Card.Body>
+          <center>
+          <div style={{ color: '#fff' }}>
+          <Card.Title>Bronx Complaints</Card.Title>
+          <Card.Text>
+            <h1>400</h1>
+          </Card.Text>
+          </div>
+          </center>
+        </Card.Body>
+      </Card>
+
+      <div style={{ margin: '40px 0px 0px 0px' }}>
+      <Card bg="danger" style={{ width: '180px' }}>
+        <Card.Body>
+          <center>
+          <div style={{ color: '#fff' }}>
+          <Card.Title>Queens Complaints</Card.Title>
+          <Card.Text>
+            <h1>668</h1>
+          </Card.Text>
+          </div>
+          </center>
+        </Card.Body>
+      </Card>
+      </div>
+
+
+    </div>
+    <div class="col-2 style={{ margin: '0px 10px 0px 10px' }}">
+    <Card bg="danger" style={{ width: '180px' }}>
+        <Card.Body>
+          <center>
+          <div style={{ color: '#fff' }}>
+          <Card.Title>Brooklyn Complaints</Card.Title>
+          <Card.Text>
+            <h1>336</h1>
+          </Card.Text>
+          </div>
+          </center>
+        </Card.Body>
+      </Card>
+
+      <div style={{ margin: '40px 0px 0px 0px' }}>
+      <Card bg="danger" style={{ width: '180px' }}>
+        <Card.Body>
+          <center>
+          <div style={{ color: '#fff' }}>
+          <Card.Title>Staten Island Complaints</Card.Title>
+          <Card.Text>
+            <h1>158</h1>
+          </Card.Text>
+          </div>
+          </center>
+        </Card.Body>
+      </Card>
+      </div>
+    </div>
+
+    <div class="col-2" style={{ margin: '0px 10px 0px 10px' }}>
+    <Card bg="dark" style={{ width: '300px' }}>
+        <Card.Body>
+          <center>
+          <div style={{ color: '#fff' }}>
+          <Card.Title>Complaints By Zone</Card.Title>
+          <Card.Text>
+            <h5>Residential</h5>
+            <h1>158</h1>
+
+            <h5>Commerial</h5>
+            <h1>40</h1>
+
+            <h5>Other</h5>
+            <h1>0</h1>
+          </Card.Text>
+          </div>
+          </center>
+        </Card.Body>
+      </Card>
+    </div>
+
+    
+  </div>
+  <div class="row">
+    <div class="col">
+    <div style={{ margin: '20px 0px 0px 0px' }}>
+      <h5>Last 10 Complaints</h5>
+      </div>
+
+      <Table striped>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td colSpan={2}>Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </Table>
+    
+    </div>
+  </div>
+</div>
+
+
+
     
     {/* <MDBCard>
       <MDBCardBody>
