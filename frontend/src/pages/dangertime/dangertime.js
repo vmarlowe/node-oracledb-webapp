@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from "react";
+import Button from '../../components/Button'
 import { fetchData } from "../../api";
 
 import {
@@ -20,7 +21,7 @@ import {
     LineElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
   );
 /*
 Complex query:
@@ -49,55 +50,46 @@ ORDER BY reports DESC;
 */
 
 const DangerTime =()=> {
-    let qArr = [];
-    
-    let stime = 0;
-    let mQuery = `WITH a AS (SELECT * FROM 
-                    (Complaint INNER JOIN Complaint_Location 
-                    ON Complaint.gps_coord = Complaint_Location.gps_coord))
-                SELECT BORO_NAME,COUNT(*) AS reports FROM 
-                    (a INNER JOIN Patrol_Boro
-                    ON a.patrol_boro_name = Patrol_Boro.Patrol_boro_name)
-                WHERE EXTRACT(HOUR FROM Complaint_From_TM) = ${stime}
-                GROUP BY BORO_NAME
-                ORDER BY reports DESC`;
-    
-    qArr.push({ sql: mQuery, id: `sql-0`, index: 0, queryBinds: [] });
+    let boros = ["BROOKLYN","QUEENS","MANHATTAN","BRONX","STATEN ISLAND"];
+    let hours = []; 
+    for (let i = 0; i < 24; i++) { hours.push(`${i}`);}
 
-    fetchData({ queries: qArr, concurrency: null }).then((response = {}) => {
-        console.log(response[0]["rows"]); 
-    });
+    //const [resArr, setResArr] = useState(['M','F']);
+    const [oMap, setoMapState ] = useState(new Map([]));
 
-    /*
-        let subqueries = [];
-        let tempInd = 0;
+    const getData =()=>{
+        boros.forEach((boro) => {
+        //oMap.push({ boro: boro, counts: [] });
+        oMap.set(`${boro}`, [])
+        //setoMapState(oMap);
 
-        resArr.forEach((i) => {
-            let subq = `SELECT COUNT(*) FROM ${pieTable} WHERE ${pieAttrib} = '${i}'`;
-            let subBinds = [];
-            subqueries.push({ sql: subq, id: `sql-${tempInd}`, index: tempInd, queryBinds: []});
-            tempInd++;
-            console.log(subqueries);
+        hours.forEach((hour)=>{
+            let mQuery = `WITH a AS (SELECT * FROM 
+                (Complaint INNER JOIN Complaint_Location 
+                ON Complaint.gps_coord = Complaint_Location.gps_coord))
+            SELECT BORO_NAME,COUNT(*) AS reports FROM 
+                (a INNER JOIN Patrol_Boro
+                ON a.patrol_boro_name = Patrol_Boro.Patrol_boro_name)
+            WHERE EXTRACT(HOUR FROM Complaint_From_TM) = ${hour} 
+            AND BORO_NAME = '${boro}'
+            GROUP BY BORO_NAME`;
+
+            fetchData({ queries: [{ sql: mQuery, id: `sql-0`, index: 0, queryBinds: [] }], concurrency: null }).then((response = {}) => {
+                console.log(response[0]["rows"][0]["REPORTS"]); 
+                //console.log(oArr[boro]);
+                //let count = Number(response[0]["rows"][0]["REPORTS"]);
+                //const index = oArr.findIndex(element => element.boro === boro);
+                //oArr[index].counts.push(response[0]["rows"][0]["REPORTS"]);
+                oMap.get(`${boro}`).push(response[0]["rows"][0]["REPORTS"]);
+                //setoMapState(oMap);
+            });
+
         });
-
-        fetchData({ queries: subqueries, concurrency: null}).then((response1) => {
-            //clear out array for pushing - need to change scope to avoid this
-            resArrData.splice(0, resArrData.length);
-            setResArrData(resArrData);
-
-            for (let count = 0; count < tempInd; count++) {
-                //push value to array
-                resArrData.push(response1[count]["rows"]["0"]["COUNT(*)"]);
-                //update array state - or else you'll get an empty array
-                setResArrData(resArrData);
-            }
-           //console.log(resArrData);
         });
+    }
 
-
-    });
-    */
-  
+    //chart stuff
+    //want to label x and y axis but idk how
     const options = {
         responsive: true,
         plugins: {
@@ -106,33 +98,69 @@ const DangerTime =()=> {
           },
           title: {
             display: true,
-            text: 'Chart.js Line Chart',
+            text: 'Complaints for each Boro by Time of Day',
+          },
+          scales: {
+            x: {
+                display: true,
+                text: 'Hour of Day (Why isn\'t this showing up)',
+            },
           },
         },
       };
+    
+    let labelHours = [];
+    for (let i = 0; i < 24; i++) { labelHours.push(`${i}`);}
+    const labels = labelHours;
       
-      const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-      
+    console.log("Brooklyn counts--")
+    console.log(oMap.get('BRONX'));
+
+    const colors = [  'rgba(123, 0, 255, 0.5)',  'rgba(255, 123, 0, 0.7)',  'rgba(0, 255, 123, 0.9)',  'rgba(123, 255, 0, 0.3)',  'rgba(255, 0, 123, 0.6)'];
+ 
+
+
     const data = {
         labels,
         datasets: [
           {
-            label: 'Dataset 1',
-            data: [1,2,3],
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            label: 'Brooklyn',
+            data: oMap.get('BROOKLYN'),
+            borderColor: colors[0],
+            backgroundColor: colors[0],
           },
           {
-            label: 'Dataset 2',
-            data: [3,2,1],
-            borderColor: 'rgb(53, 162, 235)',
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
+            label: 'Bronx',
+            data: oMap.get('BRONX'),
+            borderColor: colors[1],
+            backgroundColor: colors[1],
+          },
+          {
+            label: 'Manhattan',
+            data: oMap.get('MANHATTAN'),
+            borderColor: colors[2],
+            backgroundColor: colors[2],
+          },
+          {
+            label: 'Queens',
+            data: oMap.get('QUEENS'),
+            borderColor: colors[3],
+            backgroundColor: colors[3],
+          },
+          {
+            label: 'Staten Island',
+            data: oMap.get('STATEN ISLAND'),
+            borderColor: colors[4],
+            backgroundColor: colors[4],
           },
         ],
       };
 
   return (
     <div className='dt' id='dt1'>
+        <div className="d-flex flex-row mb-5">
+            <Button title={"Refresh Graph"} id={"dtb-1"} onClick={ () => (getData()) } />
+        </div>
         <div><Line options={options} data={data} /></div>
     </div>
   )
