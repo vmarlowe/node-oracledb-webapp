@@ -19,37 +19,15 @@ const Dashboard = () => {
   
   let boros = ["BROOKLYN","QUEENS","MANHATTAN","BRONX","STATEN ISLAND"];
 
-  //const [resArr, setResArr] = useState(['M','F']);
+  const [bMap,setbMap] = useState(new Map());
+
   const [totalComp, settotalComp] = useState('200000');
-  //const [oMap, setoMapState ] = useState(new Map([]));
 
-  /*
-          //oMap.push({ boro: boro, counts: [] });
-        oMap.set(`${boro}`, [])
-        //setoMapState(oMap);
-
-        hours.forEach((hour)=>{
-            let mQuery = `WITH a AS (SELECT * FROM 
-                (Complaint INNER JOIN Complaint_Location 
-                ON Complaint.gps_coord = Complaint_Location.gps_coord))
-            SELECT BORO_NAME,COUNT(*) AS reports FROM 
-                (a INNER JOIN Patrol_Boro
-                ON a.patrol_boro_name = Patrol_Boro.Patrol_boro_name)
-            WHERE EXTRACT(HOUR FROM Complaint_From_TM) = ${hour} 
-            AND BORO_NAME = '${boro}'
-            GROUP BY BORO_NAME`;
-
-            fetchData({ queries: [{ sql: mQuery, id: `sql-0`, index: 0, queryBinds: [] }], concurrency: null }).then((response = {}) => {
-                console.log(response[0]["rows"][0]["REPORTS"]); 
-                //console.log(oArr[boro]);
-                //let count = Number(response[0]["rows"][0]["REPORTS"]);
-                //const index = oArr.findIndex(element => element.boro === boro);
-                //oArr[index].counts.push(response[0]["rows"][0]["REPORTS"]);
-                oMap.get(`${boro}`).push(response[0]["rows"][0]["REPORTS"]);
-                //setoMapState(oMap);
-            });
-
-  */
+  const [bronxComp, setbronxComp] = useState('40000')
+  const [brookComp, setbrookComp] = useState('40000');
+  const [queensComp, setqueensComp] = useState('40000');
+  const [statComp, setstatComp] = useState('40000');
+  const [manComp, setmanComp] = useState('40000');
 
   const getData =()=>{
       let totalQuery = 'SELECT COUNT(*) FROM Complaint';
@@ -58,26 +36,33 @@ const Dashboard = () => {
         settotalComp(`${response[0]["rows"][0]["COUNT(*)"]}`);
       });
 
-      /*
-      boros.forEach((boro) => {
-          let mQuery = `WITH a AS (SELECT * FROM 
-            (Complaint INNER JOIN Complaint_Location 
-            ON Complaint.gps_coord = Complaint_Location.gps_coord))
-            SELECT BORO_NAME,COUNT(*) AS reports FROM 
-            (a INNER JOIN Patrol_Boro
-            ON a.patrol_boro_name = Patrol_Boro.Patrol_boro_name)
-            WHERE BORO_NAME = '${boro}'
-            GROUP BY BORO_NAME`;
+      
 
-            fetchData({ queries: [{ sql: mQuery, id: `sql-0`, index: 0, queryBinds: [] }], concurrency: null }).then((response = {}) => {
-              console.log(response); 
-              //oMap.get(`${boro}`).push(response[0]["rows"][0]["REPORTS"]);
-            });
+      boros.forEach((boro)=>{
+        let bQuery = `WITH a AS (SELECT * FROM 
+          (Complaint INNER JOIN Complaint_Location 
+          ON Complaint.gps_coord = Complaint_Location.gps_coord))
+          SELECT BORO_NAME,COUNT(*) AS reports FROM 
+          (a INNER JOIN Patrol_Boro
+          ON a.patrol_boro_name = Patrol_Boro.Patrol_boro_name)
+          WHERE BORO_NAME = '${boro}'
+          GROUP BY BORO_NAME`
 
-          oMap.set(`${boro}`, [])
-          //setoMapState(oMap);
+        fetchData({ queries: [{ sql: bQuery, id: `sql-0`, index: 0, queryBinds: [] }], concurrency: null }).then((response = {}) => {
+          console.log(response[0]["rows"][0]["REPORTS"]);
+          bMap.set(`${boro}`,`${response[0]["rows"][0]["REPORTS"]}`);
+          setbMap(bMap);
+
+          if(boro == 'BRONX'){ setbronxComp(`${response[0]["rows"][0]["REPORTS"]}`); }          
+          else if(boro == 'BROOKLYN'){ setbrookComp(`${response[0]["rows"][0]["REPORTS"]}`); }  
+          else if(boro == 'QUEENS'){ setqueensComp(`${response[0]["rows"][0]["REPORTS"]}`); }   
+          else if(boro == 'MANHATTAN'){ setmanComp(`${response[0]["rows"][0]["REPORTS"]}`); }   
+          else if(boro == 'STATEN ISLAND'){ setstatComp(`${response[0]["rows"][0]["REPORTS"]}`); }   
+
+        });
       });
-      */
+
+      //setbronxComp(bMap.get('BRONX'));
   }
   
   //run on page reload
@@ -120,7 +105,7 @@ const Dashboard = () => {
           <div style={{ color: '#fff' }}>
           <Card.Title>Manhattan Complaints</Card.Title>
           <Card.Text>
-            <h1>285</h1>
+            <h1>{ manComp }</h1>
           </Card.Text>
           </div>
           </center>
@@ -138,7 +123,7 @@ const Dashboard = () => {
           <div style={{ color: '#fff' }}>
           <Card.Title>Bronx Complaints</Card.Title>
           <Card.Text>
-            <h1>400</h1>
+            <h1>{bronxComp}</h1>
           </Card.Text>
           </div>
           </center>
@@ -152,7 +137,7 @@ const Dashboard = () => {
           <div style={{ color: '#fff' }}>
           <Card.Title>Queens Complaints</Card.Title>
           <Card.Text>
-            <h1>668</h1>
+            <h1>{queensComp}</h1>
           </Card.Text>
           </div>
           </center>
@@ -169,7 +154,7 @@ const Dashboard = () => {
           <div style={{ color: '#fff' }}>
           <Card.Title>Brooklyn Complaints</Card.Title>
           <Card.Text>
-            <h1>336</h1>
+            <h1>{brookComp}</h1>
           </Card.Text>
           </div>
           </center>
@@ -183,7 +168,7 @@ const Dashboard = () => {
           <div style={{ color: '#fff' }}>
           <Card.Title>Staten Island Complaints</Card.Title>
           <Card.Text>
-            <h1>158</h1>
+            <h1>{statComp}</h1>
           </Card.Text>
           </div>
           </center>
