@@ -27,7 +27,6 @@ const About = () => {
   const [totalCompLocTable, setCompLocTable] = useState('40000')
   const [totalOffenseTable, setOffenseTable] = useState('40000');
   const [totalResponderTable, setResponderTable] = useState('40000');
-  const [totalWorksInTable, setlWorksInTable] = useState('40000');
   const [totalPatrolBoroTable, setPatrolBoroTable] = useState('40000');
   const [totalPDOffense, setTotalPDOffense] = useState('40000');
 
@@ -82,15 +81,6 @@ const About = () => {
         });
       });
 
-      boros.forEach((boro)=>{
-        let bQuery = `SELECT COUNT(*) FROM Works_In`
-
-        fetchData({ queries: [{ sql: bQuery, id: `sql-0`, index: 0, queryBinds: [] }], concurrency: null }).then((response = {}) => {
-          console.log(response[0]["rows"][0]["REPORTS"]);
-          totalWorksInTable(`${response[0]["rows"][0]["COUNT(*)"]}`);
-
-        });
-      });
 
       boros.forEach((boro)=>{
         let bQuery = `SELECT COUNT(*) FROM PD_Offense`
@@ -102,7 +92,7 @@ const About = () => {
         });
       });
 
-      settotalTuples(parseInt(totalCompTable) + parseInt(totalCompLocTable) + parseInt(totalOffenseTable) + parseInt(totalResponderTable) + parseInt(totalWorksInTable) + parseInt(totalPatrolBoroTable) + parseInt(totalPDOffense));
+      settotalTuples(parseInt(totalCompTable) + parseInt(totalCompLocTable) + parseInt(totalOffenseTable) + parseInt(totalResponderTable) + parseInt(totalPatrolBoroTable) + parseInt(totalPDOffense));
 
       //setbronxComp(bMap.get('BRONX'));
   }
