@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from '../../components/Button'
 import { fetchData } from "../../api";
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import { Pie } from 'react-chartjs-2';
 
 import {
     Chart as ChartJS,
@@ -256,6 +257,56 @@ GROUP BY Patrol_Boro.Boro_Name
 </div>
   }
 
+  const vicSexPieData = {
+    //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    
+    datasets: [
+      {
+        label: '# of Votes',
+        //data: [12, 19, 3, 5, 2, 3],
+        data: data,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+        ],
+        borderWidth: 2,
+      },
+    ],
+    title:{
+      display: true,
+      text: 'Gender Chart (change this)',
+      fontSize: 18,
+      fontColor: '#FFF',
+    },
+  };
+  
+  const pieOpts = {
+    plugins: { //plugins keyword is super important
+      legend: {
+        display: true,
+      },
+      title: {
+        display: true,
+        text: 'Gender Chart',
+        fontSize: 100,
+        fontColor: '#FFF',
+      },
+    },
+    maintainAspectRatio: false,
+  };
+
   return (
 
     <>
@@ -265,10 +316,28 @@ GROUP BY Patrol_Boro.Boro_Name
       <Breadcrumb.Item href="/">Dashboard</Breadcrumb.Item>
       <Breadcrumb.Item active>Query2</Breadcrumb.Item>
     </Breadcrumb>
+
+    <h5>Show total number of complaints for each Patrol_Boro.Boro_Name where Location_Desc of INSIDE with the Premise_Type_Desc of ABANDONED BUILDING</h5>
+    
+    <h5>{data[2]}</h5>
+
+    
+
+
+
+
+
+
     </div>
+
     
     <div className='dt' id='dt1'>
-        <div><Line options={options} data={data} /></div>
+    <Pie 
+        data={data} 
+        height="200px"
+        width="200px"
+        
+        />
         <div style={{ margin: '45px 0px 0px 0px' }}>
           <center>
             <Button title={"Refresh Graph"} id={"dtb-1"} onClick={ () => (getData()) } />
