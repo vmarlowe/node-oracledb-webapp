@@ -114,8 +114,13 @@ const pieOpts = {
       <div className="d-flex flex-row mb-5">
         <Button title={"Refresh Pie"} id={"001"} onClick={() => (getvicSexPieData())} />
       </div>
-      <div className="d-flex flex-row mb-5">
-        <Pie data={vicSexPieData} options={pieOpts}/>
+      <div >
+        <Pie 
+        data={vicSexPieData} 
+        height="400px"
+        width="400px"
+        options={pieOpts}
+        />
       </div>
     </div>
   );
