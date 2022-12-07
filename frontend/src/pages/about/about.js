@@ -12,10 +12,10 @@ const tempStyle = {
   padding: '10px 10px 10px 10px',
 }
 
-function dashboard() {
+function about() {
   return (
     <>
-    <div className='dashboard'>
+    <div className='about'>
    
     <div class="container">
   <div class="row">
@@ -197,4 +197,4 @@ function dashboard() {
   )
 }
 
-export default dashboard
+export default about

@@ -5,6 +5,7 @@ import Query from "./pages/query/query";
 import Trends from "./pages/trends/trends";
 import Tables from "./pages/tables/tables";
 import DangerTime from "./pages/dangertime/dangertime";
+import About from "./pages/about/about";
 
 
 import React from 'react'
@@ -20,6 +21,7 @@ function App() {
           <Route path='/tables' exact element={<Tables/>} />
           <Route path='/query' exact element={<Query/>} />
           <Route path='/dt' exact element={<DangerTime/>} />
+          <Route path='/about' exact element={<About/>} />
         </Routes>
         </div>
       </Router>
