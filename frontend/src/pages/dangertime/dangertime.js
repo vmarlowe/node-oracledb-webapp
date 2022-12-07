@@ -12,6 +12,17 @@ would be taken between the volume of daytime complaints and volume of night time
 and this result can be compared for each zone. 
 
 SQL Query:
+WITH a AS 
+    (SELECT * FROM 
+        (Complaint INNER JOIN Complaint_Location 
+        ON Complaint.gps_coord = Complaint_Location.gps_coord))
+        
+SELECT BORO_NAME,COUNT(*) AS reports FROM 
+    (a INNER JOIN Patrol_Boro
+        ON a.patrol_boro_name = Patrol_Boro.Patrol_boro_name)
+WHERE EXTRACT(HOUR FROM Complaint_From_TM) = 0
+GROUP BY BORO_NAME
+ORDER BY reports DESC;
 
 */
 
