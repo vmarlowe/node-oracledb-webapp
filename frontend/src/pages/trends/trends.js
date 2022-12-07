@@ -101,7 +101,7 @@ const pieOpts = {
     },
     title: {
       display: true,
-      text: 'Gender Chart (change this title)',
+      text: 'Gender Chart',
       fontSize: 100,
       fontColor: '#FFF',
     },
