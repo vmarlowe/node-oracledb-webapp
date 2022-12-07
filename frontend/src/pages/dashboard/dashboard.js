@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import { fetchData } from "../../api";
 import {Link} from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
@@ -14,7 +15,76 @@ const tempStyle = {
   padding: '10px 10px 10px 10px',
 }
 
-function dashboard() {
+const Dashboard = () => {
+  
+  let boros = ["BROOKLYN","QUEENS","MANHATTAN","BRONX","STATEN ISLAND"];
+
+  //const [resArr, setResArr] = useState(['M','F']);
+  const [totalComp, settotalComp] = useState('200000');
+  //const [oMap, setoMapState ] = useState(new Map([]));
+
+  /*
+          //oMap.push({ boro: boro, counts: [] });
+        oMap.set(`${boro}`, [])
+        //setoMapState(oMap);
+
+        hours.forEach((hour)=>{
+            let mQuery = `WITH a AS (SELECT * FROM 
+                (Complaint INNER JOIN Complaint_Location 
+                ON Complaint.gps_coord = Complaint_Location.gps_coord))
+            SELECT BORO_NAME,COUNT(*) AS reports FROM 
+                (a INNER JOIN Patrol_Boro
+                ON a.patrol_boro_name = Patrol_Boro.Patrol_boro_name)
+            WHERE EXTRACT(HOUR FROM Complaint_From_TM) = ${hour} 
+            AND BORO_NAME = '${boro}'
+            GROUP BY BORO_NAME`;
+
+            fetchData({ queries: [{ sql: mQuery, id: `sql-0`, index: 0, queryBinds: [] }], concurrency: null }).then((response = {}) => {
+                console.log(response[0]["rows"][0]["REPORTS"]); 
+                //console.log(oArr[boro]);
+                //let count = Number(response[0]["rows"][0]["REPORTS"]);
+                //const index = oArr.findIndex(element => element.boro === boro);
+                //oArr[index].counts.push(response[0]["rows"][0]["REPORTS"]);
+                oMap.get(`${boro}`).push(response[0]["rows"][0]["REPORTS"]);
+                //setoMapState(oMap);
+            });
+
+  */
+
+  const getData =()=>{
+      let totalQuery = 'SELECT COUNT(*) FROM Complaint';
+      fetchData({ queries: [{ sql: totalQuery, id: `sql-0`, index: 0, queryBinds: [] }], concurrency: null }).then((response = {}) => {
+        console.log(response); 
+        settotalComp(`${response[0]["rows"][0]["COUNT(*)"]}`);
+      });
+
+      /*
+      boros.forEach((boro) => {
+          let mQuery = `WITH a AS (SELECT * FROM 
+            (Complaint INNER JOIN Complaint_Location 
+            ON Complaint.gps_coord = Complaint_Location.gps_coord))
+            SELECT BORO_NAME,COUNT(*) AS reports FROM 
+            (a INNER JOIN Patrol_Boro
+            ON a.patrol_boro_name = Patrol_Boro.Patrol_boro_name)
+            WHERE BORO_NAME = '${boro}'
+            GROUP BY BORO_NAME`;
+
+            fetchData({ queries: [{ sql: mQuery, id: `sql-0`, index: 0, queryBinds: [] }], concurrency: null }).then((response = {}) => {
+              console.log(response); 
+              //oMap.get(`${boro}`).push(response[0]["rows"][0]["REPORTS"]);
+            });
+
+          oMap.set(`${boro}`, [])
+          //setoMapState(oMap);
+      });
+      */
+  }
+  
+  //run on page reload
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <>
     <div className='dashboard'>
@@ -36,7 +106,7 @@ function dashboard() {
           <div style={{ color: '#fff' }}>
           <Card.Title>Total Complaints</Card.Title>
           <Card.Text>
-            <h1>10485</h1>
+            <h1>{totalComp}</h1>
           </Card.Text>
           </div>
           </center>
@@ -204,4 +274,4 @@ function dashboard() {
   )
 }
 
-export default dashboard
+export default Dashboard
