@@ -33,6 +33,13 @@ export const SidebarData = [
         cName: 'nav-text'
     }, 
 
+    {
+        title: 'Query 4',
+        path: '/query4',
+        icon: <AiIcons.AiOutlineFileSearch />,
+        cName: 'nav-text'
+    }, 
+
 
     {
         title: 'Trend View',

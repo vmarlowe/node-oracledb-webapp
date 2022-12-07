@@ -7,6 +7,7 @@ import Tables from "./pages/tables/tables";
 import Query1 from "./pages/queries/query1";
 import Query2 from "./pages/queries/query2";
 import Query3 from "./pages/queries/query3";
+import Query4 from "./pages/queries/query4";
 import About from "./pages/about/about";
 
 
@@ -25,6 +26,7 @@ function App() {
           <Route path='/query1' exact element={<Query1/>} />
           <Route path='/query2' exact element={<Query2/>} />
           <Route path='/query3' exact element={<Query3/>} />
+          <Route path='/query4' exact element={<Query4/>} />
           <Route path='/about' exact element={<About/>} />
         </Routes>
         </div>
