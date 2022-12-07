@@ -21,7 +21,6 @@ const About = () => {
   const [bMap,setbMap] = useState(new Map());
 
   const [totalTuples, settotalTuples] = useState('2500000');
-
   const [totalCompTable, settotalComp] = useState('200000');
   const [totalCompLocTable, setCompLocTable] = useState('40000')
   const [totalOffenseTable, setOffenseTable] = useState('40000');

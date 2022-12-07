@@ -11,6 +11,14 @@ export const SidebarData = [
         icon: <AiIcons.AiFillHome />,
         cName: 'nav-text'
     },
+
+    {
+        title: 'Query 1',
+        path: '/query1',
+        icon: <AiIcons.AiOutlineFileSearch />,
+        cName: 'nav-text'
+    }, 
+
     {
         title: 'Trend View',
         path: '/trends',
@@ -19,23 +27,16 @@ export const SidebarData = [
     },  
 
     {
-        title: 'Table View',
-        path: '/tables',
-        icon: <BsIcons.BsTable />,
+        title: 'Query Tool',
+        path: '/querytool',
+        icon: <AiIcons.AiOutlineFileSearch />,
         cName: 'nav-text'
     },  
 
     {
-        title: 'Query Tool',
-        path: '/query',
-        icon: <AiIcons.AiOutlineFileSearch />,
-        cName: 'nav-text'
-    },  
-   
-    {
-        title: 'Dangerous Times',
-        path: '/dt',
-        icon: <AiIcons.AiOutlineFileSearch />,
+        title: 'Table View',
+        path: '/tables',
+        icon: <BsIcons.BsTable />,
         cName: 'nav-text'
     },  
 

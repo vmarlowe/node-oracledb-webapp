@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { fetchData } from "../../api";
 import Button from "../../components/Button";
-
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
 import 'chart.js/auto'
 import { Pie } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend, Title);
+
+
 
 const Trends = () => {
 //populate pie data
@@ -110,10 +112,16 @@ const pieOpts = {
 };
 
   return (
+
+    <div class="container">
+    <div style={{ margin: '20px 0px 0px 0px' }}>
+    <Breadcrumb>
+      <Breadcrumb.Item href="/">Dashboard</Breadcrumb.Item>
+      <Breadcrumb.Item active>Trends</Breadcrumb.Item>
+    </Breadcrumb>
+    </div>
     <div id={"2938"}className="container mt-5">
-      <div className="d-flex flex-row mb-5">
-        <Button title={"Refresh Pie"} id={"001"} onClick={() => (getvicSexPieData())} />
-      </div>
+      
       <div >
         <Pie 
         data={vicSexPieData} 
@@ -122,6 +130,15 @@ const pieOpts = {
         options={pieOpts}
         />
       </div>
+
+      <center>
+      <div style={{ margin: '40px 0px 0px 0px' }}>
+      <div class="container">
+        <Button title={"Refresh Pie"} id={"001"} onClick={() => (getvicSexPieData())} />
+      </div>
+      </div>
+      </center>
+    </div>
     </div>
   );
 };

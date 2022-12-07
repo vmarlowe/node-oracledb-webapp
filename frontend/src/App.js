@@ -4,7 +4,7 @@ import Dashboard from "./pages/dashboard/dashboard";
 import Query from "./pages/query/query";
 import Trends from "./pages/trends/trends";
 import Tables from "./pages/tables/tables";
-import DangerTime from "./pages/dangertime/dangertime";
+import Query1 from "./pages/queries/query1";
 import About from "./pages/about/about";
 
 
@@ -19,8 +19,8 @@ function App() {
           <Route path='/' exact element={<Dashboard/>} />
           <Route path='/trends' exact element={<Trends/>} />
           <Route path='/tables' exact element={<Tables/>} />
-          <Route path='/query' exact element={<Query/>} />
-          <Route path='/dt' exact element={<DangerTime/>} />
+          <Route path='/querytool' exact element={<Query/>} />
+          <Route path='/query1' exact element={<Query1/>} />
           <Route path='/about' exact element={<About/>} />
         </Routes>
         </div>

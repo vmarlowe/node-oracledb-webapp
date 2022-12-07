@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from '../../components/Button'
 import { fetchData } from "../../api";
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 import {
     Chart as ChartJS,
@@ -57,7 +58,7 @@ ORDER BY BORO_NAME,HOUR;
 
 */
 
-const DangerTime =()=> {
+const Query1 =()=> {
   let labelHours = [];
   for (let i = 0; i < 24; i++) { labelHours.push(`${i}`);}
   const labels = labelHours;
@@ -260,13 +261,27 @@ const DangerTime =()=> {
   }
 
   return (
-    <div className='dt' id='dt1'>
-        <div className="d-flex flex-row mb-5">
-            <Button title={"Refresh Graph"} id={"dtb-1"} onClick={ () => (getData()) } />
-        </div>
-        <div><Line options={options} data={data} /></div>
+
+    <>
+    <div class="container">
+    <div style={{ margin: '20px 0px 0px 0px' }}>
+    <Breadcrumb>
+      <Breadcrumb.Item href="/">Dashboard</Breadcrumb.Item>
+      <Breadcrumb.Item active>Query1</Breadcrumb.Item>
+    </Breadcrumb>
     </div>
+    
+    <div className='dt' id='dt1'>
+        <div><Line options={options} data={data} /></div>
+        <div style={{ margin: '45px 0px 0px 0px' }}>
+          <center>
+            <Button title={"Refresh Graph"} id={"dtb-1"} onClick={ () => (getData()) } />
+            </center>
+        </div>
+        </div>
+    </div>
+    </>
   )
 }
 
-export default DangerTime
+export default Query1
