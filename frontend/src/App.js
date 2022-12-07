@@ -5,8 +5,8 @@ import Query from "./pages/query/query";
 import Trends from "./pages/trends/trends";
 import Tables from "./pages/tables/tables";
 import Query1 from "./pages/queries/query1";
-import Query2 from "./pages/queries/query1";
-import Query3 from "./pages/queries/query1";
+import Query2 from "./pages/queries/query2";
+import Query3 from "./pages/queries/query3";
 import About from "./pages/about/about";
 
 
