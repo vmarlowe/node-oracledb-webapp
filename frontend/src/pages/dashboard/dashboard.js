@@ -152,7 +152,7 @@ function dashboard() {
       <h5>Last 10 Complaints</h5>
       </div>
 
-      <Table striped bordered hover variant="dark">
+      <Table striped>
       <thead>
         <tr>
           <th>#</th>
@@ -181,6 +181,7 @@ function dashboard() {
         </tr>
       </tbody>
     </Table>
+    
     </div>
   </div>
 </div>
